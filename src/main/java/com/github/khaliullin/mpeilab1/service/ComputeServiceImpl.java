@@ -85,7 +85,7 @@ public class ComputeServiceImpl implements ComputeService{
         Computation max = computeRepo.findById(1).get();
 
         double delta_h = max.getH()*Math.sqrt(
-                Math.pow(0.0001/max.getI(),2)+
+                Math.pow(0.00075/max.getI(),2)+
                 Math.pow(0.5/2500, 2)+
                 Math.pow(0.005/0.3, 2)
         );
@@ -100,7 +100,7 @@ public class ComputeServiceImpl implements ComputeService{
 
 
         double delta_m = max.getM()*Math.sqrt(
-                        Math.pow(0.04,max.getB())+
+                        Math.pow(0.04/max.getB(),2)+
                         Math.pow(10/max.getH(), 2)
         );
 
