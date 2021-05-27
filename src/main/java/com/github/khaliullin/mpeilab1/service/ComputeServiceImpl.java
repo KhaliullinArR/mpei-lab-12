@@ -24,7 +24,7 @@ public class ComputeServiceImpl implements ComputeService{
     }
 
     @Override
-    public List<Computation> compute_H() {
+    public void compute_H() {
 
         List<Computation> computations = computeRepo.findAll();
 
@@ -37,11 +37,10 @@ public class ComputeServiceImpl implements ComputeService{
 
         computeRepo.saveAll(computations);
 
-        return computations;
     }
 
     @Override
-    public List<Computation> compute_B() {
+    public void compute_B() {
 
         List<Computation> computations = computeRepo.findAll();
 
@@ -51,8 +50,8 @@ public class ComputeServiceImpl implements ComputeService{
         double A;
 
         for (Computation computation : computations) {
-             A = Math.pow(3d, -8d);
-             S = Math.pow(0.8, -4d);
+             A = 3d *  Math.pow(10, -8);
+             S = 0.8 * Math.pow(10, -4);
              C = (A * 600) / (2 * S * 10);
              B = C * computation.getN();
              computation.setB(B);
@@ -61,29 +60,58 @@ public class ComputeServiceImpl implements ComputeService{
 
         computeRepo.saveAll(computations);
 
-        return computations;
     }
 
     @Override
-    public List<Computation> compute_m() {
+    public void compute_m() {
 
         List<Computation> computations = computeRepo.findAll();
 
         double m;
 
         for (Computation computation : computations) {
-
-
+            m = computation.getB()/(computation.getH()*1.2566*0.000001);
+            computation.setM(m);
         }
 
         computeRepo.saveAll(computations);
 
-        return null;
     }
 
 
     @Override
     public String getInfelicity() {
-        return null;
+
+        Computation max = computeRepo.findById(1).get();
+
+        double delta_h = max.getH()*Math.sqrt(
+                Math.pow(0.0001/max.getI(),2)+
+                Math.pow(0.5/2500, 2)+
+                Math.pow(0.005/0.3, 2)
+        );
+
+        double delta_b = max.getB()*Math.sqrt(
+                        Math.pow(0.02,2)+
+                        Math.pow(1d/max.getN(), 2)+
+                        Math.pow(0.05/600, 2)+
+                        Math.pow(0.5/10,2)+
+                        Math.pow(0.005/0.8,2)
+        );
+
+
+        double delta_m = max.getM()*Math.sqrt(
+                        Math.pow(0.04,max.getB())+
+                        Math.pow(10/max.getH(), 2)
+        );
+
+        String FORMAT = "H = %s \u00B1 %s\n" +
+                "B = %s \u00B1 %s\n" +
+                "u = %s \u00B1 %s\n";
+
+
+
+        return String.format(FORMAT, max.getH(), delta_h,
+                max.getB(), delta_b,
+                max.getM(), delta_m);
     }
 }

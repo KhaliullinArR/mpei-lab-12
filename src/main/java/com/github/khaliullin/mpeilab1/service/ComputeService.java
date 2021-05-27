@@ -7,11 +7,11 @@ import java.util.List;
 public interface ComputeService {
     List<Computation> getAll();
 
-    List<Computation> compute_H();
+    void compute_H();
 
-    List<Computation> compute_B();
+    void compute_B();
 
-    List<Computation> compute_m();
+    void compute_m();
 
     String getInfelicity();
 }
