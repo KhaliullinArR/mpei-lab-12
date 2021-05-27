@@ -8,27 +8,30 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "stats")
+@Table(name = "STATS")
 @Data
 public class Computation {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "ID")
     private  Integer id;
 
-    @Column(name = "word_i")
+    @Column(name = "WORD_I")
     private Double I;
 
-    @Column(name = "word_h")
+    @Column(name = "WORD_H")
     private Double H;
 
-    @Column(name = "word_n")
+    @Column(name = "WORD_N")
     private Integer n;
 
-    @Column(name = "word_b")
+    @Column(name = "WORD_B")
     private Double B;
 
-    @Column(name = "word_m")
+    @Column(name = "WORD_M")
     private Double m;
+
+    @Column(name = "WORD_C")
+    private Double C;
 
 }

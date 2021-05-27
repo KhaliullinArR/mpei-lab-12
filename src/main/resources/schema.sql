@@ -6,7 +6,8 @@ CREATE TABLE  stats(
   word_h DECIMAL,
   word_n INT NOT NULL,
   word_b DECIMAL,
-  word_m DECIMAL
+  word_m DECIMAL,
+  word_c DECIMAL
 );
 
 INSERT INTO stats (word_i, word_n) VALUES
