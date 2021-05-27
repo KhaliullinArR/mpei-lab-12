@@ -19,7 +19,6 @@ public class ComputeController {
     @GetMapping("/computations")
     public List<Computation> getComputes() {
         computeService.compute_H();
-        computeService.compute_B();
         return computeService.compute_B();
     }
 

@@ -42,11 +42,42 @@ public class ComputeServiceImpl implements ComputeService{
 
     @Override
     public List<Computation> compute_B() {
-        return null;
+
+        List<Computation> computations = computeRepo.findAll();
+
+        double B;
+        double C;
+        double S;
+        double A;
+
+        for (Computation computation : computations) {
+             A = Math.pow(3d, -8d);
+             S = Math.pow(0.8, -4d);
+             C = (A * 600) / (2 * S * 10);
+             B = C * computation.getN();
+             computation.setB(B);
+             computation.setC(C);
+        }
+
+        computeRepo.saveAll(computations);
+
+        return computations;
     }
 
     @Override
     public List<Computation> compute_m() {
+
+        List<Computation> computations = computeRepo.findAll();
+
+        double m;
+
+        for (Computation computation : computations) {
+
+
+        }
+
+        computeRepo.saveAll(computations);
+
         return null;
     }
 
